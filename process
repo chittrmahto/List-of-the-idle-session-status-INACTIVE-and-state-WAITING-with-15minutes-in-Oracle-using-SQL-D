@@ -1,0 +1,4 @@
+select 'alter system kill session '''||sid||','||serial#||''' immediate;' ,username,seconds_in_wait/60 as mint 
+from v$session 
+where username not in ('SYS','SYSTEM') 
+and  status='INACTIVE' and state='WAITING' and seconds_in_wait>900;
